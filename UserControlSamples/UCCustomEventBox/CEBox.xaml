@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="UCCustomEventBox.CustomEventTextBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UCCustomEventBox"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>      
+        <Storyboard x:Key="SBRedBlinkBox" RepeatBehavior="Forever">
+            <!--From="{Binding Path=Color}" To="White"-->
+            <ColorAnimation Storyboard.TargetProperty="(TextBox.Background).(SolidColorBrush.Color)"
+                            From="Red" To="White"
+                            Duration="0:0:0.5"
+                            AutoReverse="False"/>
+        </Storyboard>
+        <Storyboard x:Key="SBBlueBlinkBox" RepeatBehavior="Forever">
+            <ColorAnimation Storyboard.TargetProperty="(TextBox.Background).(SolidColorBrush.Color)"
+                            From="Blue" To="White"
+                            Duration="0:0:0.5"
+                            AutoReverse="False"/>
+        </Storyboard>
+
+        <Style x:Key="CEBlinkStyle" TargetType="{x:Type local:CustomReoutedTextBox}">
+            <Setter Property="TextBox.FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Style.Triggers>
+                <!--<EventTrigger RoutedEvent="local:CustomReoutedTextBox.RedBlink">-->
+                <EventTrigger RoutedEvent="{x:Static local:CustomReoutedTextBox.RedBlinkEvent}">
+                    <!--<EventTrigger.EnterActions>-->
+                          <BeginStoryboard x:Name="Rstb" Storyboard="{StaticResource SBRedBlinkBox}"/>
+                    <!--</EventTrigger.EnterActions>-->
+                </EventTrigger>
+                <EventTrigger RoutedEvent="{x:Static local:CustomReoutedTextBox.BlueBlinkEvent}">
+                    <BeginStoryboard x:Name="Bstb" Storyboard="{StaticResource SBBlueBlinkBox}"/>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <StackPanel>
+            <local:CustomReoutedTextBox Text = "{Binding Path=Text}" 
+                                        BlinkColor="{Binding Path=BlinkColor}"
+                                        Style="{StaticResource CEBlinkStyle}" 
+                                        BlueBlink="CustomReoutedTextBox_BlueBlink" 
+                                        RedBlink="CustomReoutedTextBox_RedBlink" />
+        </StackPanel>
+    </Grid>
+</UserControl>

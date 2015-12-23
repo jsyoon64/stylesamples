@@ -1,0 +1,41 @@
+﻿<Window xmlns:UCBlinkTextbox="clr-namespace:UCBlinkTextbox;assembly=UCBlinkTextbox"  
+        xmlns:UCBlinkTextblock="clr-namespace:UCBlinkTextblock;assembly=UCBlinkTextblock" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:UCTextbox="clr-namespace:UCTextbox;assembly=UCTextbox"
+        xmlns:UCCustomEventBox="clr-namespace:UCCustomEventBox;assembly=UCCustomEventBox"
+        xmlns:local="clr-namespace:UserControlSamples"
+        x:Class="UserControlSamples.MainWindow"
+        Title="MainWindow" Height="350" Width="525">
+
+    <StackPanel>
+        <WrapPanel>
+            <UCTextbox:CTextbox Label="CTextbox" Value="10" Margin="10,0"/>
+        </WrapPanel>
+        
+        <WrapPanel>
+            <CheckBox x:Name="ISblinkcheckbox" Content="Blink Text" Margin="10,0" />
+            <UCBlinkTextblock:BlinkTextblock Text="Text Blink" 
+                                             IsBlink="{Binding IsChecked, ElementName=ISblinkcheckbox}"/>
+        </WrapPanel>
+
+        <WrapPanel>
+            <CheckBox Content="Blink Text" Margin="10,0" IsChecked="{Binding BType.IsBlink, Mode=TwoWay}"/>
+            <UCBlinkTextblock:BlinkTextblock Text="Text Blink" 
+				IsBlink="{Binding BType.IsBlink, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"/>
+        </WrapPanel>
+        
+        <WrapPanel>
+            <CheckBox x:Name="ISblinkcheckbox1" Content="Blink Box" Margin="10,0"/>
+            <UCBlinkTextbox:BlinkTextbox Text="100" 
+				IsBlink="{Binding IsChecked, ElementName=ISblinkcheckbox1}"/>
+        </WrapPanel>
+
+        <WrapPanel>
+            <Button x:Name="RedRB" Content="Red Blink" Margin="10,0" Width="80" Click="RedRB_Click"/>
+            <Button x:Name="BlueRB" Content="Blue Blink" Margin="10,0" Width="80" Click="BlueRB_Click" />
+            <UCCustomEventBox:CustomEventTextBox x:Name="CETBox" Text="200" />
+        </WrapPanel>
+
+    </StackPanel>
+</Window>
