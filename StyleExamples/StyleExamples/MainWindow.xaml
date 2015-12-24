@@ -44,11 +44,18 @@
             <ic:GoToStateAction StateName="RedBlink" UseTransitions="True"/>
         </ic:DataTrigger>
     </i:Interaction.Triggers>-->
+
+    <!--<i:Interaction.Triggers>
+        <ic:PropertyChangedTrigger Binding="{Binding VisualState}" >
+            <ic:GoToStateAction StateName="{Binding VisualState}"/>
+        </ic:PropertyChangedTrigger>
+    </i:Interaction.Triggers>-->
+    
     <Grid>
         <StackPanel>
             <WrapPanel x:Name="BlinkWrapPanel">
                 <TextBlock Text="BlinkTextBlock" Margin="10,0" />
-                <TextBox Text="Blink Text" Width="75" Style="{StaticResource BlinkTextBlockStyle}"/>
+                <TextBox Text="Blink Text Example" Width="150" FontSize="16" Style="{StaticResource BlinkTextBlockStyle}"/>
                 <CheckBox Content="Blink" IsChecked="{Binding IsBlink, Mode=TwoWay}"/>
             </WrapPanel>
 
@@ -73,7 +80,7 @@
             </WrapPanel>
 
             <WrapPanel>
-                <TextBlock Text="VisualStateManager Style" Margin="10,0" />
+                <TextBlock Text="VisualStateManager Style 360 회전" Margin="10,0" />
                 <Button Content="Button" Width="75" Style="{DynamicResource ResourceKey=VSMButtonStyle}"/>
             </WrapPanel>
 

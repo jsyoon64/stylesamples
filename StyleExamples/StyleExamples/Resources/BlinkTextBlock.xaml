@@ -4,6 +4,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <!--Textblock에 Template가 없어서 TextBox로 Textblock을 만듦-->
+    <!--MVVM Model에서 IsBlink를 Define 해야함.-->
     <Style x:Key="BlinkTextBlockStyle" TargetType="{x:Type TextBox}">
         <Setter Property="Template">
             <Setter.Value>
@@ -35,11 +36,10 @@
                         <TextBlock x:Name="BTextBlk" 
                                        Text="{TemplateBinding Text}"
                                        Foreground="{TemplateBinding Foreground}"/>
-
                         <i:Interaction.Behaviors>
                             <ic:DataStateBehavior Binding="{Binding IsBlink }" Value="true" 
-                                              TrueState="RedBlink" 
-                                              FalseState="NoBlink">
+                                                  TrueState="RedBlink" 
+                                                  FalseState="NoBlink">
                             </ic:DataStateBehavior>
                         </i:Interaction.Behaviors>
                     </Grid>
